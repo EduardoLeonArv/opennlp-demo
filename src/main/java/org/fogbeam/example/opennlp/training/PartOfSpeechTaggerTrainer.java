@@ -17,9 +17,13 @@ import opennlp.tools.util.ObjectStream;
 import opennlp.tools.util.PlainTextByLineStream;
 import opennlp.tools.util.TrainingParameters;
 
+import org.fogbeam.example.opennlp.ChunkerMain;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PartOfSpeechTaggerTrainer
 {
+	private static final Logger logger = LoggerFactory.getLogger(ChunkerMain.class);
 	public static void main( String[] args )
 	{
 		POSModel model = null;
@@ -37,7 +41,7 @@ public class PartOfSpeechTaggerTrainer
 		catch( IOException e )
 		{
 			// Failed to read or parse training data, training failed
-			e.printStackTrace();
+			logger.error("An error occurred during the chunker process", e);
 		}
 		finally
 		{
