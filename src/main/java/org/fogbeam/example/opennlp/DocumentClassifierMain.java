@@ -6,9 +6,12 @@ import java.io.InputStream;
 import opennlp.tools.doccat.DoccatModel;
 import opennlp.tools.doccat.DocumentCategorizerME;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DocumentClassifierMain
 {
-
+	private static final Logger logger = LoggerFactory.getLogger(DocumentClassifierMain.class);
 	public static void main( String[] args ) throws Exception
 	{
 		
@@ -25,13 +28,13 @@ public class DocumentClassifierMain
 			double[] outcomes = myCategorizer.categorize(inputText);
 			String category = myCategorizer.getBestCategory( outcomes );
 			
-			System.out.println( "Input classified as: " + category );
+            logger.info("Classification process completed successfully.");
 			
 			
 		}
 		catch( Exception e )
 		{
-			e.printStackTrace();
+            logger.error("An error occurred during the classification process", e);
 			
 		}
 		finally
