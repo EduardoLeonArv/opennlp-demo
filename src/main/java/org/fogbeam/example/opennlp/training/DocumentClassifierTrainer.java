@@ -83,7 +83,7 @@ public class DocumentClassifierTrainer
 				{
 					// Failed to correctly save model.
 					// Written model might be invalid.
-					e.printStackTrace();
+					logger.error("An error occurred during the chunker process", e);
 				}
 			}
 		}
