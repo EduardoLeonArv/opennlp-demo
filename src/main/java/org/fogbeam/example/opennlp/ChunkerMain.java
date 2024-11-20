@@ -9,9 +9,12 @@ import java.io.InputStream;
 import opennlp.tools.chunker.ChunkerME;
 import opennlp.tools.chunker.ChunkerModel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChunkerMain
 {
+    private static final Logger logger = LoggerFactory.getLogger(ChunkerMain.class);
 	public static void main( String[] args ) throws Exception
 	{
 		InputStream modelIn = null;
@@ -58,7 +61,7 @@ public class ChunkerMain
 		catch( IOException e )
 		{
 			// Model loading failed, handle the error
-			e.printStackTrace();
+			logger.error("An error occurred during the chunker process", e);
 		}
 		finally
 		{
@@ -75,6 +78,6 @@ public class ChunkerMain
 		}
 		
 		
-		System.out.println( "done" );
+		System.out.println("done");
 	}
 }
