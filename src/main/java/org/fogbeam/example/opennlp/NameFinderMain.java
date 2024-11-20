@@ -22,8 +22,8 @@ public class NameFinderMain
         {
             modelIn = new FileInputStream("models/en-ner-person.model");
             TokenNameFinderModel model = new TokenNameFinderModel(modelIn);
-
             NameFinderME nameFinder = new NameFinderME(model);
+
             String[] tokens = { 
                 "Phillip", 
                 "Rhodes",
@@ -34,12 +34,13 @@ public class NameFinderMain
                 "meeting",
                 "."
             };
+
             Span[] names = nameFinder.find(tokens);
 
             if (logger.isInfoEnabled()) {
                 for (Span ns : names)
                 {
-                    logger.info("Name span found: {}", ns.toString());
+                    logger.info("Name span found: {}", ns); // No se llama explícitamente a toString()
                 }
             }
 
