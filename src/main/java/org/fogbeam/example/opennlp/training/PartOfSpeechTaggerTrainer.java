@@ -56,7 +56,7 @@ public class PartOfSpeechTaggerTrainer
 					// Not an issue, training already finished.
 					// The exception should be logged and investigated
 					// if part of a production system.
-					e.printStackTrace();
+					logger.error("An error occurred during the chunker process", e);
 				}
 			}
 		}
@@ -71,7 +71,7 @@ public class PartOfSpeechTaggerTrainer
 		catch( IOException e )
 		{
 			// Failed to save model
-			e.printStackTrace();
+			logger.error("An error occurred during the chunker process", e);
 		}
 		finally
 		{
@@ -85,7 +85,7 @@ public class PartOfSpeechTaggerTrainer
 				{
 					// Failed to correctly save model.
 					// Written model might be invalid.
-					e.printStackTrace();
+					logger.error("An error occurred during the chunker process", e);
 				}
 			}
 						
