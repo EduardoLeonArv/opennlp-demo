@@ -22,9 +22,8 @@ public class NameFinderMain
         {
             modelIn = new FileInputStream("models/en-ner-person.model");
             TokenNameFinderModel model = new TokenNameFinderModel(modelIn);
-        
-            NameFinderME nameFinder = new NameFinderME(model);
 
+            NameFinderME nameFinder = new NameFinderME(model);
             String[] tokens = { 
                 "Phillip", 
                 "Rhodes",
@@ -35,12 +34,13 @@ public class NameFinderMain
                 "meeting",
                 "."
             };
-
             Span[] names = nameFinder.find(tokens);
-        
-            for (Span ns : names)
-            {
-                logger.info("Name span found: {}", ns.toString());
+
+            if (logger.isInfoEnabled()) {
+                for (Span ns : names)
+                {
+                    logger.info("Name span found: {}", ns.toString());
+                }
             }
 
             nameFinder.clearAdaptiveData();
@@ -63,7 +63,9 @@ public class NameFinderMain
                 }
             }
         }
-        
-        logger.info("Processing complete");
+
+        if (logger.isInfoEnabled()) {
+            logger.info("Processing complete");
+        }
     }
 }
