@@ -24,7 +24,6 @@ public class ParserMain
         {
             modelIn = new FileInputStream("models/en-parser-chunking.bin");
             ParserModel model = new ParserModel(modelIn);
-
             Parser parser = ParserFactory.create(model);
 
             String sentence = "The quick brown fox jumps over the lazy dog .";
@@ -34,14 +33,13 @@ public class ParserMain
             if (topParses.length > 0) {
                 Parse parse = topParses[0];
                 if (logger.isInfoEnabled()) {
-                    logger.info("Parse Tree: {}", parse.toString());
+                    logger.info("Parse Tree: {}", parse); // No se necesita toString()
                 }
 
                 parse.showCodeTree(); // Assuming this is necessary; adjust if not.
             } else {
                 logger.warn("No parse could be generated for the sentence: {}", sentence);
             }
-
         }
         catch (IOException e)
         {
