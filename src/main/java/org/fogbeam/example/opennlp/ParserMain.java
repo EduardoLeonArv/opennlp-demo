@@ -12,10 +12,12 @@ import opennlp.tools.parser.Parser;
 import opennlp.tools.parser.ParserFactory;
 import opennlp.tools.parser.ParserModel;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ParserMain
 {
+	private static final Logger logger = LoggerFactory.getLogger(ParserMain.class);
 	public static void main( String[] args ) throws Exception
 	{
 		InputStream modelIn = new FileInputStream( "models/en-parser-chunking.bin" );
@@ -35,11 +37,13 @@ public class ParserMain
 			System.out.println( parse.toString() );
 			
 			parse.showCodeTree();
+			logger.info("Parser process completed successfully.");
+
 			
 		}
 		catch( IOException e )
 		{
-			e.printStackTrace();
+            logger.error("An error occurred during the parser process", e);
 		}
 		finally
 		{
