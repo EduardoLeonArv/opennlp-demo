@@ -9,9 +9,13 @@ import java.io.InputStream;
 import opennlp.tools.sentdetect.SentenceDetectorME;
 import opennlp.tools.sentdetect.SentenceModel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SentenceDetectionMain
 {
+	private static final Logger logger = LoggerFactory.getLogger(SentenceDetectionMain.class);
+
 	public static void main( String[] args ) throws Exception
 	{
 		InputStream modelIn = new FileInputStream( "models/en-sent.model" );
@@ -38,7 +42,7 @@ public class SentenceDetectionMain
 		}
 		catch( IOException e )
 		{
-			e.printStackTrace();
+            logger.error("An error occurred during the sentence detection process", e);
 		}
 		finally
 		{
