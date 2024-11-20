@@ -54,7 +54,7 @@ public class DocumentClassifierTrainer
 					// Not an issue, training already finished.
 					// The exception should be logged and investigated
 					// if part of a production system.
-					e.printStackTrace();
+					logger.error("An error occurred during the chunker process", e);
 				}
 			}
 		}
@@ -69,7 +69,7 @@ public class DocumentClassifierTrainer
 		catch( IOException e )
 		{
 			// Failed to save model
-			e.printStackTrace();
+			logger.error("An error occurred during the chunker process", e);
 		}
 		finally
 		{
