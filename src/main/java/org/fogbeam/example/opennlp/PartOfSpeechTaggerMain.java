@@ -9,9 +9,13 @@ import java.io.InputStream;
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerME;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PartOfSpeechTaggerMain
 {
+	private static final Logger logger = LoggerFactory.getLogger(PartOfSpeechTaggerMain.class);
+
 	public static void main( String[] args )
 	{
 		InputStream modelIn = null;
@@ -37,12 +41,13 @@ public class PartOfSpeechTaggerMain
 				System.out.println( "Token [" + sent[i] + "] has POS [" + tags[i] + "] with probability = " + probs[i] );
 			}
 			
-			
+			logger.info("POS tagging process completed successfully.");
+
 		}
 		catch( IOException e )
 		{
 			// Model loading failed, handle the error
-			e.printStackTrace();
+            logger.error("An error occurred during the POS tagging process", e);
 		}
 		finally
 		{
