@@ -1,0 +1,77 @@
+\doxysection{org.\+fogbeam.\+example.\+opennlp.\+Parser\+Main Class Reference}
+\hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_parser_main}{}\label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_parser_main}\index{org.fogbeam.example.opennlp.ParserMain@{org.fogbeam.example.opennlp.ParserMain}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_parser_main_a48bc5bcb185febfd50c3a9c1301e689e}{main}} (String\mbox{[}$\,$\mbox{]} args)  throws Exception  
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_parser_main_8java_source_l00017}{17}} of file \mbox{\hyperlink{_parser_main_8java_source}{Parser\+Main.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_parser_main_a48bc5bcb185febfd50c3a9c1301e689e}\index{org.fogbeam.example.opennlp.ParserMain@{org.fogbeam.example.opennlp.ParserMain}!main@{main}}
+\index{main@{main}!org.fogbeam.example.opennlp.ParserMain@{org.fogbeam.example.opennlp.ParserMain}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_parser_main_a48bc5bcb185febfd50c3a9c1301e689e} 
+static void org.\+fogbeam.\+example.\+opennlp.\+Parser\+Main.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_parser_main_8java_source_l00019}{19}} of file \mbox{\hyperlink{_parser_main_8java_source}{Parser\+Main.\+java}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ InputStream\ modelIn\ =\ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}models/en-\/parser-\/chunking.bin"{}}\ );}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ ParserModel\ model\ =\ \textcolor{keyword}{new}\ ParserModel(\ modelIn\ );}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ Parser\ parser\ =\ ParserFactory.create(model);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ String\ sentence\ =\ \textcolor{stringliteral}{"{}The\ quick\ brown\ fox\ jumps\ over\ the\ lazy\ dog\ ."{}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ Parse\ topParses[]\ =\ ParserTool.parseLine(sentence,\ parser,\ 1);\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ Parse\ parse\ =\ topParses[0];}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\ parse.toString()\ );}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ parse.showCodeTree();}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ modelIn\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelIn.close();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_parser_main_8java}{Parser\+Main.\+java}}\end{DoxyCompactItemize}

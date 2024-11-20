@@ -1,0 +1,97 @@
+\doxysection{org.\+fogbeam.\+example.\+opennlp.\+Name\+Finder\+Main Class Reference}
+\hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_name_finder_main}{}\label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_name_finder_main}\index{org.fogbeam.example.opennlp.NameFinderMain@{org.fogbeam.example.opennlp.NameFinderMain}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_name_finder_main_a48247d65390730211c23c41f939c055a}{main}} (String\mbox{[}$\,$\mbox{]} args)  throws Exception  
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_name_finder_main_8java_source_l00014}{14}} of file \mbox{\hyperlink{_name_finder_main_8java_source}{Name\+Finder\+Main.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_name_finder_main_a48247d65390730211c23c41f939c055a}\index{org.fogbeam.example.opennlp.NameFinderMain@{org.fogbeam.example.opennlp.NameFinderMain}!main@{main}}
+\index{main@{main}!org.fogbeam.example.opennlp.NameFinderMain@{org.fogbeam.example.opennlp.NameFinderMain}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_name_finder_main_a48247d65390730211c23c41f939c055a} 
+static void org.\+fogbeam.\+example.\+opennlp.\+Name\+Finder\+Main.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_name_finder_main_8java_source_l00019}{19}} of file \mbox{\hyperlink{_name_finder_main_8java_source}{Name\+Finder\+Main.\+java}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ InputStream\ modelIn\ =\ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}models/en-\/ner-\/person.model"{}}\ );}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ InputStream\ modelIn\ =\ new\ FileInputStream(\ "{}models/en-\/ner-\/person.bin"{}\ );}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ TokenNameFinderModel\ model\ =\ \textcolor{keyword}{new}\ TokenNameFinderModel(\ modelIn\ );}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ NameFinderME\ nameFinder\ =\ \textcolor{keyword}{new}\ NameFinderME(model);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ String[]\ tokens\ =\ \{\ \textcolor{comment}{//"{}A"{},\ "{}guy"{},\ "{}named"{},}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ "{}Mr."{},\ }}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Phillip"{}},\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Rhodes"{}},}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}is"{}},}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}presenting"{}},}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}at"{}},}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}some"{}},}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}meeting"{}},}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}."{}}\};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ Span[]\ names\ =\ nameFinder.find(\ tokens\ );}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ Span\ ns\ :\ names\ )}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}ns:\ "{}}\ +\ ns.toString()\ );}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ you\ want\ to\ actually\ do\ something\ with\ the\ name}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ nameFinder.clearAdaptiveData();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ modelIn\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelIn.close();}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_name_finder_main_8java}{Name\+Finder\+Main.\+java}}\end{DoxyCompactItemize}

@@ -1,0 +1,99 @@
+\doxysection{Part\+Of\+Speech\+Tagger\+Trainer.\+java}
+\hypertarget{_part_of_speech_tagger_trainer_8java_source}{}\label{_part_of_speech_tagger_trainer_8java_source}\index{PartOfSpeechTaggerTrainer.java@{PartOfSpeechTaggerTrainer.java}}
+\mbox{\hyperlink{_part_of_speech_tagger_trainer_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00002}00002\ \textcolor{keyword}{package\ }org.fogbeam.example.opennlp.training;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00005}00005\ \textcolor{keyword}{import}\ java.io.BufferedOutputStream;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00006}00006\ \textcolor{keyword}{import}\ java.io.FileInputStream;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.io.FileOutputStream;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.io.IOException;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.io.InputStream;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00010}00010\ \textcolor{keyword}{import}\ java.io.OutputStream;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00012}00012\ \textcolor{keyword}{import}\ opennlp.tools.postag.POSModel;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00013}00013\ \textcolor{keyword}{import}\ opennlp.tools.postag.POSSample;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00014}00014\ \textcolor{keyword}{import}\ opennlp.tools.postag.POSTaggerME;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00015}00015\ \textcolor{keyword}{import}\ opennlp.tools.postag.WordTagSampleStream;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00016}00016\ \textcolor{keyword}{import}\ opennlp.tools.util.ObjectStream;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00017}00017\ \textcolor{keyword}{import}\ opennlp.tools.util.PlainTextByLineStream;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00018}00018\ \textcolor{keyword}{import}\ opennlp.tools.util.TrainingParameters;}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00021}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_part_of_speech_tagger_trainer}{00021}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_part_of_speech_tagger_trainer}{PartOfSpeechTaggerTrainer}}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00022}00022\ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00023}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_part_of_speech_tagger_trainer_a7dbb23d74b570716df727c4b618ac083}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_part_of_speech_tagger_trainer_a7dbb23d74b570716df727c4b618ac083}{main}}(\ String[]\ args\ )}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ POSModel\ model\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ InputStream\ dataIn\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ dataIn\ =\ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}training\_data/en-\/pos.train"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ ObjectStream<String>\ lineStream\ =\ \textcolor{keyword}{new}\ PlainTextByLineStream(}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dataIn,\ \textcolor{stringliteral}{"{}UTF-\/8"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ ObjectStream<POSSample>\ sampleStream\ =\ \textcolor{keyword}{new}\ WordTagSampleStream(}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lineStream\ );}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ model\ =\ POSTaggerME.train(\ \textcolor{stringliteral}{"{}en"{}},\ sampleStream,}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TrainingParameters.defaultParams(),\ \textcolor{keyword}{null},\ \textcolor{keyword}{null}\ );}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ read\ or\ parse\ training\ data,\ training\ failed}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ dataIn\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dataIn.close();}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Not\ an\ issue,\ training\ already\ finished.}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ exception\ should\ be\ logged\ and\ investigated}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ part\ of\ a\ production\ system.}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ OutputStream\ modelOut\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ String\ modelFile\ =\ \textcolor{stringliteral}{"{}models/en-\/pos.model"{}};}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ modelOut\ =\ \textcolor{keyword}{new}\ BufferedOutputStream(\ \textcolor{keyword}{new}\ FileOutputStream(}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelFile\ )\ );}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ model.serialize(\ modelOut\ );}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ save\ model}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ modelOut\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelOut.close();}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ correctly\ save\ model.}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Written\ model\ might\ be\ invalid.}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00090}00090\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00091}00091\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00092}00092\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_part_of_speech_tagger_trainer_8java_source_l00093}00093\ \}}
+
+\end{DoxyCode}

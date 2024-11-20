@@ -1,0 +1,56 @@
+\doxysection{Sentence\+Detection\+Trainer.\+java}
+\hypertarget{_sentence_detection_trainer_8java_source}{}\label{_sentence_detection_trainer_8java_source}\index{SentenceDetectionTrainer.java@{SentenceDetectionTrainer.java}}
+\mbox{\hyperlink{_sentence_detection_trainer_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00002}00002\ \textcolor{keyword}{package\ }org.fogbeam.example.opennlp.training;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.io.BufferedOutputStream;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00005}00005\ \textcolor{keyword}{import}\ java.io.File;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00006}00006\ \textcolor{keyword}{import}\ java.io.FileInputStream;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.io.FileOutputStream;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.io.OutputStream;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.nio.charset.Charset;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00011}00011\ \textcolor{keyword}{import}\ opennlp.tools.sentdetect.SentenceDetectorME;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00012}00012\ \textcolor{keyword}{import}\ opennlp.tools.sentdetect.SentenceModel;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00013}00013\ \textcolor{keyword}{import}\ opennlp.tools.sentdetect.SentenceSample;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00014}00014\ \textcolor{keyword}{import}\ opennlp.tools.sentdetect.SentenceSampleStream;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00015}00015\ \textcolor{keyword}{import}\ opennlp.tools.util.ObjectStream;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00016}00016\ \textcolor{keyword}{import}\ opennlp.tools.util.PlainTextByLineStream;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00017}00017\ \textcolor{keyword}{import}\ opennlp.tools.util.TrainingParameters;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00020}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_sentence_detection_trainer}{00020}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_sentence_detection_trainer}{SentenceDetectionTrainer}}}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00022}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_sentence_detection_trainer_ac80405591298c5f1e235179d40555dce}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_sentence_detection_trainer_ac80405591298c5f1e235179d40555dce}{main}}(\ String[]\ args\ )\ \textcolor{keywordflow}{throws}\ Exception}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ Charset\ charset\ =\ Charset.forName(\textcolor{stringliteral}{"{}UTF-\/8"{}});\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ ObjectStream<String>\ lineStream\ =\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ PlainTextByLineStream(\textcolor{keyword}{new}\ FileInputStream(\textcolor{stringliteral}{"{}training\_data/en-\/sent.train"{}}),\ charset);}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ ObjectStream<SentenceSample>\ sampleStream\ =\ \textcolor{keyword}{new}\ SentenceSampleStream(lineStream);}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ SentenceModel\ model;}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ model\ =\ SentenceDetectorME.train(\textcolor{stringliteral}{"{}en"{}},\ sampleStream,\ \textcolor{keyword}{true},\ \textcolor{keyword}{null},\ TrainingParameters.defaultParams());}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}\ \{}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ sampleStream.close();}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ OutputStream\ modelOut\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ File\ modelFile\ =\ \textcolor{keyword}{new}\ File(\ \textcolor{stringliteral}{"{}models/en-\/sent.model"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ modelOut\ =\ \textcolor{keyword}{new}\ BufferedOutputStream(\textcolor{keyword}{new}\ FileOutputStream(modelFile));}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ model.serialize(modelOut);}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{finally}\ \{}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelOut\ !=\ \textcolor{keyword}{null})\ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ modelOut.close();\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sentence_detection_trainer_8java_source_l00050}00050\ \}}
+
+\end{DoxyCode}

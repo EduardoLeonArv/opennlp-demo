@@ -1,0 +1,72 @@
+\doxysection{org.\+fogbeam.\+example.\+opennlp.\+training.\+Name\+Finder\+Trainer Class Reference}
+\hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_name_finder_trainer}{}\label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_name_finder_trainer}\index{org.fogbeam.example.opennlp.training.NameFinderTrainer@{org.fogbeam.example.opennlp.training.NameFinderTrainer}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_name_finder_trainer_a5598df8b5f8ffb35f022358ed3b124ed}{main}} (String\mbox{[}$\,$\mbox{]} args)  throws Exception  
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_name_finder_trainer_8java_source_l00022}{22}} of file \mbox{\hyperlink{_name_finder_trainer_8java_source}{Name\+Finder\+Trainer.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_name_finder_trainer_a5598df8b5f8ffb35f022358ed3b124ed}\index{org.fogbeam.example.opennlp.training.NameFinderTrainer@{org.fogbeam.example.opennlp.training.NameFinderTrainer}!main@{main}}
+\index{main@{main}!org.fogbeam.example.opennlp.training.NameFinderTrainer@{org.fogbeam.example.opennlp.training.NameFinderTrainer}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_name_finder_trainer_a5598df8b5f8ffb35f022358ed3b124ed} 
+static void org.\+fogbeam.\+example.\+opennlp.\+training.\+Name\+Finder\+Trainer.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_name_finder_trainer_8java_source_l00024}{24}} of file \mbox{\hyperlink{_name_finder_trainer_8java_source}{Name\+Finder\+Trainer.\+java}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ Charset\ charset\ =\ Charset.forName(\ \textcolor{stringliteral}{"{}UTF-\/8"{}}\ );}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ ObjectStream<String>\ lineStream\ =\ \textcolor{keyword}{new}\ PlainTextByLineStream(}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}training\_data/en-\/ner-\/person.train"{}}\ ),\ charset\ );}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ ObjectStream<NameSample>\ sampleStream\ =\ \textcolor{keyword}{new}\ NameSampleDataStream(}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lineStream\ );}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ TokenNameFinderModel\ model;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ model\ =\ NameFinderME.train(\ \textcolor{stringliteral}{"{}en"{}},\ \textcolor{stringliteral}{"{}person"{}},\ sampleStream,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TrainingParameters.defaultParams(),\ (\textcolor{keywordtype}{byte}[])\ \textcolor{keyword}{null},}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Collections.<String,\ Object>\ emptyMap()\ );}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ sampleStream.close();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ BufferedOutputStream\ modelOut\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ String\ modelFile\ =\ \textcolor{stringliteral}{"{}models/en-\/ner-\/person.model"{}};}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ modelOut\ =\ \textcolor{keyword}{new}\ BufferedOutputStream(\ \textcolor{keyword}{new}\ FileOutputStream(\ modelFile\ )\ );}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ model.serialize(\ modelOut\ );}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ modelOut\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelOut.close();}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_name_finder_trainer_8java}{Name\+Finder\+Trainer.\+java}}\end{DoxyCompactItemize}

@@ -1,63 +1,49 @@
 
 package org.fogbeam.example.opennlp;
 
+import java.io.*;
+import java.nio.file.*;
+import java.util.stream.*;
+import opennlp.tools.tokenize.*;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+public class TokenizerMain {
+    public static void main(String[] args) throws Exception {
+        if (args.length < 2) {
+            System.out.println("Usage: java TokenizerMain <input-dir> <output-file>");
+            return;
+        }
 
-import opennlp.tools.tokenize.Tokenizer;
-import opennlp.tools.tokenize.TokenizerME;
-import opennlp.tools.tokenize.TokenizerModel;
+        String inputDir = args[0];
+        String outputFile = args[1];
 
+        InputStream modelIn = new FileInputStream("models/en-token.model");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            TokenizerModel model = new TokenizerModel(modelIn);
+            Tokenizer tokenizer = new TokenizerME(model);
 
-public class TokenizerMain
-{
-	public static void main( String[] args ) throws Exception
-	{
-		
-		// the provided model
-		// InputStream modelIn = new FileInputStream( "models/en-token.bin" );
-
-		
-		// the model we trained
-		InputStream modelIn = new FileInputStream( "models/en-token.model" );
-		
-		try
-		{
-			TokenizerModel model = new TokenizerModel( modelIn );
-		
-			Tokenizer tokenizer = new TokenizerME(model);
-			
-				/* note what happens with the "three depending on which model you use */
-			String[] tokens = tokenizer.tokenize
-					(  "A ranger journeying with Oglethorpe, founder of the Georgia Colony, " 
-							+ " mentions \"three Mounts raised by the Indians over three of their Great Kings" 
-							+ " who were killed in the Wars.\"" );
-			
-			for( String token : tokens )
-			{
-				System.out.println( token );
-			}
-			
-		}
-		catch( IOException e )
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			if( modelIn != null )
-			{
-				try
-				{
-					modelIn.close();
-				}
-				catch( IOException e )
-				{
-				}
-			}
-		}
-		System.out.println( "\n-----\ndone" );
-	}
+            Files.list(Paths.get(inputDir))
+                .filter(Files::isRegularFile)
+                .forEach(file -> {
+                    try (Stream<String> lines = Files.lines(file)) {
+                        lines.forEach(line -> {
+                            String[] tokens = tokenizer.tokenize(line);
+                            try {
+                                writer.write(String.join(" ", tokens));
+                                writer.newLine();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+        } finally {
+            if (modelIn != null) modelIn.close();
+        }
+        System.out.println("Tokens written to: " + outputFile);
+    }
 }
+
+
+

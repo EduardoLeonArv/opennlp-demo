@@ -1,0 +1,95 @@
+\doxysection{org.\+fogbeam.\+example.\+opennlp.\+Sentence\+Detection\+Main Class Reference}
+\hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_sentence_detection_main}{}\label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_sentence_detection_main}\index{org.fogbeam.example.opennlp.SentenceDetectionMain@{org.fogbeam.example.opennlp.SentenceDetectionMain}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_sentence_detection_main_ac9dc50e787e53db95a38e87b633ceea9}{main}} (String\mbox{[}$\,$\mbox{]} args)  throws Exception  
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_sentence_detection_main_8java_source_l00013}{13}} of file \mbox{\hyperlink{_sentence_detection_main_8java_source}{Sentence\+Detection\+Main.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_sentence_detection_main_ac9dc50e787e53db95a38e87b633ceea9}\index{org.fogbeam.example.opennlp.SentenceDetectionMain@{org.fogbeam.example.opennlp.SentenceDetectionMain}!main@{main}}
+\index{main@{main}!org.fogbeam.example.opennlp.SentenceDetectionMain@{org.fogbeam.example.opennlp.SentenceDetectionMain}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_sentence_detection_main_ac9dc50e787e53db95a38e87b633ceea9} 
+static void org.\+fogbeam.\+example.\+opennlp.\+Sentence\+Detection\+Main.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_sentence_detection_main_8java_source_l00015}{15}} of file \mbox{\hyperlink{_sentence_detection_main_8java_source}{Sentence\+Detection\+Main.\+java}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ InputStream\ modelIn\ =\ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}models/en-\/sent.model"{}}\ );}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ InputStream\ demoDataIn\ =\ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}demo\_data/en-\/sent1.demo"{}}\ );}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ SentenceModel\ model\ =\ \textcolor{keyword}{new}\ SentenceModel(\ modelIn\ );}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ SentenceDetectorME\ sentenceDetector\ =\ \textcolor{keyword}{new}\ SentenceDetectorME(model);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ String\ demoData\ =\ convertStreamToString(\ demoDataIn\ );}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ String\ sentences[]\ =\ sentenceDetector.sentDetect(\ demoData\ );}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ String\ sentence\ :\ sentences\ )}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\ sentence\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ );}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ modelIn\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelIn.close();}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ demoDataIn\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ demoDataIn.close();}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_sentence_detection_main_8java}{Sentence\+Detection\+Main.\+java}}\end{DoxyCompactItemize}

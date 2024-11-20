@@ -1,0 +1,96 @@
+\doxysection{Document\+Classifier\+Trainer.\+java}
+\hypertarget{_document_classifier_trainer_8java_source}{}\label{_document_classifier_trainer_8java_source}\index{DocumentClassifierTrainer.java@{DocumentClassifierTrainer.java}}
+\mbox{\hyperlink{_document_classifier_trainer_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00002}00002\ \textcolor{keyword}{package\ }org.fogbeam.example.opennlp.training;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00005}00005\ \textcolor{keyword}{import}\ java.io.BufferedOutputStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00006}00006\ \textcolor{keyword}{import}\ java.io.FileInputStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.io.FileOutputStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.io.IOException;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.io.InputStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00010}00010\ \textcolor{keyword}{import}\ java.io.OutputStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00012}00012\ \textcolor{keyword}{import}\ opennlp.tools.doccat.DoccatModel;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00013}00013\ \textcolor{keyword}{import}\ opennlp.tools.doccat.DocumentCategorizerME;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00014}00014\ \textcolor{keyword}{import}\ opennlp.tools.doccat.DocumentSample;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00015}00015\ \textcolor{keyword}{import}\ opennlp.tools.doccat.DocumentSampleStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00016}00016\ \textcolor{keyword}{import}\ opennlp.tools.util.ObjectStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00017}00017\ \textcolor{keyword}{import}\ opennlp.tools.util.PlainTextByLineStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00020}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_document_classifier_trainer}{00020}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_document_classifier_trainer}{DocumentClassifierTrainer}}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00022}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_document_classifier_trainer_ad740f4a3bd9a068afd18c2be85deba75}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_document_classifier_trainer_ad740f4a3bd9a068afd18c2be85deba75}{main}}(\ String[]\ args\ )\ \textcolor{keywordflow}{throws}\ Exception}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ DoccatModel\ model\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ InputStream\ dataIn\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ dataIn\ =\ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}training\_data/en-\/doccat.train"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ ObjectStream<String>\ lineStream\ =\ \textcolor{keyword}{new}\ PlainTextByLineStream(}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dataIn,\ \textcolor{stringliteral}{"{}UTF-\/8"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ ObjectStream<DocumentSample>\ sampleStream\ =\ \textcolor{keyword}{new}\ DocumentSampleStream(}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lineStream\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ model\ =\ DocumentCategorizerME.train(\ \textcolor{stringliteral}{"{}en"{}},\ sampleStream\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ read\ or\ parse\ training\ data,\ training\ failed}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ dataIn\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dataIn.close();}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Not\ an\ issue,\ training\ already\ finished.}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ exception\ should\ be\ logged\ and\ investigated}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ part\ of\ a\ production\ system.}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ OutputStream\ modelOut\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ String\ modelFile\ =\ \textcolor{stringliteral}{"{}models/en-\/doccat.model"{}};}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ modelOut\ =\ \textcolor{keyword}{new}\ BufferedOutputStream(\ \textcolor{keyword}{new}\ FileOutputStream(}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelFile\ )\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ model.serialize(\ modelOut\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ save\ model}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ modelOut\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelOut.close();}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ correctly\ save\ model.}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Written\ model\ might\ be\ invalid.}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00089}00089\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_trainer_8java_source_l00090}00090\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,72 @@
+\doxysection{org.\+fogbeam.\+example.\+opennlp.\+Tokenizer\+Main Class Reference}
+\hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_tokenizer_main}{}\label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_tokenizer_main}\index{org.fogbeam.example.opennlp.TokenizerMain@{org.fogbeam.example.opennlp.TokenizerMain}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_tokenizer_main_a957e2ce0b42d88a63fe225dd240d5e95}{main}} (String\mbox{[}$\,$\mbox{]} args)  throws Exception 
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_tokenizer_main_8java_source_l00009}{9}} of file \mbox{\hyperlink{_tokenizer_main_8java_source}{Tokenizer\+Main.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_tokenizer_main_a957e2ce0b42d88a63fe225dd240d5e95}\index{org.fogbeam.example.opennlp.TokenizerMain@{org.fogbeam.example.opennlp.TokenizerMain}!main@{main}}
+\index{main@{main}!org.fogbeam.example.opennlp.TokenizerMain@{org.fogbeam.example.opennlp.TokenizerMain}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_tokenizer_main_a957e2ce0b42d88a63fe225dd240d5e95} 
+static void org.\+fogbeam.\+example.\+opennlp.\+Tokenizer\+Main.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_tokenizer_main_8java_source_l00010}{10}} of file \mbox{\hyperlink{_tokenizer_main_8java_source}{Tokenizer\+Main.\+java}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (args.length\ <\ 2)\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Usage:\ java\ TokenizerMain\ <input-\/dir>\ <output-\/file>"{}});}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ String\ inputDir\ =\ args[0];}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ String\ outputFile\ =\ args[1];}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ InputStream\ modelIn\ =\ \textcolor{keyword}{new}\ FileInputStream(\textcolor{stringliteral}{"{}models/en-\/token.model"{}});}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ (BufferedWriter\ writer\ =\ \textcolor{keyword}{new}\ BufferedWriter(\textcolor{keyword}{new}\ FileWriter(outputFile)))\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ TokenizerModel\ model\ =\ \textcolor{keyword}{new}\ TokenizerModel(modelIn);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ Tokenizer\ tokenizer\ =\ \textcolor{keyword}{new}\ TokenizerME(model);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ Files.list(Paths.get(inputDir))}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .filter(Files::isRegularFile)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .forEach(file\ -\/>\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ (Stream<String>\ lines\ =\ Files.lines(file))\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lines.forEach(line\ -\/>\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String[]\ tokens\ =\ tokenizer.tokenize(line);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ writer.write(String.join(\textcolor{stringliteral}{"{}\ "{}},\ tokens));}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ writer.newLine();}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IOException\ e)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (IOException\ e)\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{finally}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelIn\ !=\ \textcolor{keyword}{null})\ modelIn.close();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ System.out.println(\textcolor{stringliteral}{"{}Tokens\ written\ to:\ "{}}\ +\ outputFile);}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_tokenizer_main_8java}{Tokenizer\+Main.\+java}}\end{DoxyCompactItemize}

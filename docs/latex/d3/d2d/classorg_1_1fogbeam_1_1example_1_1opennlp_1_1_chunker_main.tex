@@ -1,0 +1,100 @@
+\doxysection{org.\+fogbeam.\+example.\+opennlp.\+Chunker\+Main Class Reference}
+\hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_chunker_main}{}\label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_chunker_main}\index{org.fogbeam.example.opennlp.ChunkerMain@{org.fogbeam.example.opennlp.ChunkerMain}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_chunker_main_aebe7fefe98c9216bf8fa956439def47b}{main}} (String\mbox{[}$\,$\mbox{]} args)  throws Exception  
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_chunker_main_8java_source_l00013}{13}} of file \mbox{\hyperlink{_chunker_main_8java_source}{Chunker\+Main.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_chunker_main_aebe7fefe98c9216bf8fa956439def47b}\index{org.fogbeam.example.opennlp.ChunkerMain@{org.fogbeam.example.opennlp.ChunkerMain}!main@{main}}
+\index{main@{main}!org.fogbeam.example.opennlp.ChunkerMain@{org.fogbeam.example.opennlp.ChunkerMain}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_chunker_main_aebe7fefe98c9216bf8fa956439def47b} 
+static void org.\+fogbeam.\+example.\+opennlp.\+Chunker\+Main.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_chunker_main_8java_source_l00015}{15}} of file \mbox{\hyperlink{_chunker_main_8java_source}{Chunker\+Main.\+java}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ InputStream\ modelIn\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ ChunkerModel\ model\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ modelIn\ =\ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}models/en-\/chunker.model"{}}\ );}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ model\ =\ \textcolor{keyword}{new}\ ChunkerModel(\ modelIn\ );}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ ChunkerME\ chunker\ =\ \textcolor{keyword}{new}\ ChunkerME(model);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ordinarily\ you'd\ use\ a\ Tokenizer\ to\ do\ this\ */}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ String\ sent[]\ =\ \textcolor{keyword}{new}\ String[]\ \{\ \textcolor{stringliteral}{"{}Rockwell"{}},\ \textcolor{stringliteral}{"{}International"{}},\ \textcolor{stringliteral}{"{}Corp."{}},\ \textcolor{stringliteral}{"{}'s"{}},}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Tulsa"{}},\ \textcolor{stringliteral}{"{}unit"{}},\ \textcolor{stringliteral}{"{}said"{}},\ \textcolor{stringliteral}{"{}it"{}},\ \textcolor{stringliteral}{"{}signed"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}tentative"{}},\ \textcolor{stringliteral}{"{}agreement"{}},}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}extending"{}},\ \textcolor{stringliteral}{"{}its"{}},\ \textcolor{stringliteral}{"{}contract"{}},\ \textcolor{stringliteral}{"{}with"{}},\ \textcolor{stringliteral}{"{}Boeing"{}},\ \textcolor{stringliteral}{"{}Co."{}},\ \textcolor{stringliteral}{"{}to"{}},}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}provide"{}},\ \textcolor{stringliteral}{"{}structural"{}},\ \textcolor{stringliteral}{"{}parts"{}},\ \textcolor{stringliteral}{"{}for"{}},\ \textcolor{stringliteral}{"{}Boeing"{}},\ \textcolor{stringliteral}{"{}'s"{}},\ \textcolor{stringliteral}{"{}747"{}},}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}jetliners"{}},\ \textcolor{stringliteral}{"{}."{}}\ \};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ and\ then\ use\ the\ POS\ Tagger\ to\ do\ this\ */}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ String\ pos[]\ =\ \textcolor{keyword}{new}\ String[]\ \{\ \textcolor{stringliteral}{"{}NNP"{}},\ \textcolor{stringliteral}{"{}NNP"{}},\ \textcolor{stringliteral}{"{}NNP"{}},\ \textcolor{stringliteral}{"{}POS"{}},\ \textcolor{stringliteral}{"{}NNP"{}},\ \textcolor{stringliteral}{"{}NN"{}},}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}VBD"{}},\ \textcolor{stringliteral}{"{}PRP"{}},\ \textcolor{stringliteral}{"{}VBD"{}},\ \textcolor{stringliteral}{"{}DT"{}},\ \textcolor{stringliteral}{"{}JJ"{}},\ \textcolor{stringliteral}{"{}NN"{}},\ \textcolor{stringliteral}{"{}VBG"{}},\ \textcolor{stringliteral}{"{}PRP\$"{}},\ \textcolor{stringliteral}{"{}NN"{}},\ \textcolor{stringliteral}{"{}IN"{}},}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}NNP"{}},\ \textcolor{stringliteral}{"{}NNP"{}},\ \textcolor{stringliteral}{"{}TO"{}},\ \textcolor{stringliteral}{"{}VB"{}},\ \textcolor{stringliteral}{"{}JJ"{}},\ \textcolor{stringliteral}{"{}NNS"{}},\ \textcolor{stringliteral}{"{}IN"{}},\ \textcolor{stringliteral}{"{}NNP"{}},\ \textcolor{stringliteral}{"{}POS"{}},\ \textcolor{stringliteral}{"{}CD"{}},\ \textcolor{stringliteral}{"{}NNS"{}},}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}."{}}\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ String\ tag[]\ =\ chunker.chunk(sent,\ pos);\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ probs[]\ =\ chunker.probs();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ The\ chunk\ tags\ contain\ the\ name\ of\ the\ chunk\ type,\ for\  }}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ example\ I-\/NP\ for\ noun\ phrase\ words\ and\ I-\/VP\ for\ verb\  }}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ phrase\ words.\ Most\ chunk\ types\ have\ two\ types\ of\ chunk\  }}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tags,\ B-\/CHUNK\ for\ the\ first\ word\ of\ the\ chunk\ and\ I-\/CHUNK\  }}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ for\ each\ other\ word\ in\ the\ chunk. }}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ sent.length;\ i++\ )}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}Token\ ["{}}+\ sent[i]\ +\ \textcolor{stringliteral}{"{}]\ has\ chunk\ tag\ ["{}}\ +\ tag[i]\ +\ \textcolor{stringliteral}{"{}]\ with\ probability\ =\ "{}}\ +\ probs[i]\ );}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Model\ loading\ failed,\ handle\ the\ error}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ modelIn\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelIn.close();}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ IOException\ e\ )}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_chunker_main_8java}{Chunker\+Main.\+java}}\end{DoxyCompactItemize}

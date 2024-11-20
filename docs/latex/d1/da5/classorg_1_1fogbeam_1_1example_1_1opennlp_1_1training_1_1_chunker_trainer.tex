@@ -1,0 +1,79 @@
+\doxysection{org.\+fogbeam.\+example.\+opennlp.\+training.\+Chunker\+Trainer Class Reference}
+\hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_chunker_trainer}{}\label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_chunker_trainer}\index{org.fogbeam.example.opennlp.training.ChunkerTrainer@{org.fogbeam.example.opennlp.training.ChunkerTrainer}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_chunker_trainer_afe3aca3ce6d44e121520a6db250b331c}{main}} (String\mbox{[}$\,$\mbox{]} args)  throws Exception  
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_chunker_trainer_8java_source_l00021}{21}} of file \mbox{\hyperlink{_chunker_trainer_8java_source}{Chunker\+Trainer.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_chunker_trainer_afe3aca3ce6d44e121520a6db250b331c}\index{org.fogbeam.example.opennlp.training.ChunkerTrainer@{org.fogbeam.example.opennlp.training.ChunkerTrainer}!main@{main}}
+\index{main@{main}!org.fogbeam.example.opennlp.training.ChunkerTrainer@{org.fogbeam.example.opennlp.training.ChunkerTrainer}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_chunker_trainer_afe3aca3ce6d44e121520a6db250b331c} 
+static void org.\+fogbeam.\+example.\+opennlp.\+training.\+Chunker\+Trainer.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_chunker_trainer_8java_source_l00023}{23}} of file \mbox{\hyperlink{_chunker_trainer_8java_source}{Chunker\+Trainer.\+java}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00024\ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ Charset\ charset\ =\ Charset.forName(\ \textcolor{stringliteral}{"{}UTF-\/8"{}}\ );}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ without\ enough\ training\ data,\ you\ get\ a\ NPE...}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ObjectStream<String>\ lineStream\ =\ new\ PlainTextByLineStream(}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ new\ FileInputStream(\ "{}training\_data/en-\/chunker.train"{}\ ),\ charset\ );}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ ObjectStream<String>\ lineStream\ =\ \textcolor{keyword}{new}\ PlainTextByLineStream(}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}training\_data/conll2000-\/chunker.train"{}}\ ),\ charset\ );}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ ObjectStream<ChunkSample>\ sampleStream\ =\ \textcolor{keyword}{new}\ ChunkSampleStream(}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lineStream\ );}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ ChunkerModel\ model;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ model\ =\ ChunkerME.train(\ \textcolor{stringliteral}{"{}en"{}},\ sampleStream,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ DefaultChunkerContextGenerator(),}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TrainingParameters.defaultParams()\ );}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ sampleStream.close();}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ OutputStream\ modelOut\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ String\ modelFile\ =\ \textcolor{stringliteral}{"{}models/en-\/chunker.model"{}};}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ modelOut\ =\ \textcolor{keyword}{new}\ BufferedOutputStream(\ \textcolor{keyword}{new}\ FileOutputStream(}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelFile\ )\ );}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ model.serialize(\ modelOut\ );}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ modelOut\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelOut.close();}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_chunker_trainer_8java}{Chunker\+Trainer.\+java}}\end{DoxyCompactItemize}

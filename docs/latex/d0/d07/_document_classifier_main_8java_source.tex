@@ -1,0 +1,53 @@
+\doxysection{Document\+Classifier\+Main.\+java}
+\hypertarget{_document_classifier_main_8java_source}{}\label{_document_classifier_main_8java_source}\index{DocumentClassifierMain.java@{DocumentClassifierMain.java}}
+\mbox{\hyperlink{_document_classifier_main_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00001}00001\ \textcolor{keyword}{package\ }org.fogbeam.example.opennlp;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.io.FileInputStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.io.InputStream;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00006}00006\ \textcolor{keyword}{import}\ opennlp.tools.doccat.DoccatModel;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00007}00007\ \textcolor{keyword}{import}\ opennlp.tools.doccat.DocumentCategorizerME;}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00009}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_document_classifier_main}{00009}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_document_classifier_main}{DocumentClassifierMain}}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00010}00010\ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00012}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_document_classifier_main_ab612b2c0777286a7c3e8a63c64c822fe}{00012}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1_document_classifier_main_ab612b2c0777286a7c3e8a63c64c822fe}{main}}(\ String[]\ args\ )\ \textcolor{keywordflow}{throws}\ Exception}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00014}00014\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00015}00015\ \ \ \ \ \ \ \ \ InputStream\ is\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00017}00017\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ is\ =\ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}models/en-\/doccat.model"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00019}00019\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ DoccatModel\ m\ =\ \textcolor{keyword}{new}\ DoccatModel(is);}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ String\ inputText\ =\ \textcolor{stringliteral}{"{}What\ happens\ if\ we\ have\ declining\ bottom-\/line\ revenue?"{}};}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ DocumentCategorizerME\ myCategorizer\ =\ \textcolor{keyword}{new}\ DocumentCategorizerME(m);}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}[]\ outcomes\ =\ myCategorizer.categorize(inputText);}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ String\ category\ =\ myCategorizer.getBestCategory(\ outcomes\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}Input\ classified\ as:\ "{}}\ +\ category\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}(\ Exception\ e\ )}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ is\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is.close();}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_document_classifier_main_8java_source_l00047}00047\ \}}
+
+\end{DoxyCode}

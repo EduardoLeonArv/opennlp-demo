@@ -1,0 +1,63 @@
+\doxysection{org.\+fogbeam.\+example.\+opennlp.\+training.\+Sentence\+Detection\+Trainer Class Reference}
+\hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_sentence_detection_trainer}{}\label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_sentence_detection_trainer}\index{org.fogbeam.example.opennlp.training.SentenceDetectionTrainer@{org.fogbeam.example.opennlp.training.SentenceDetectionTrainer}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_sentence_detection_trainer_ac80405591298c5f1e235179d40555dce}{main}} (String\mbox{[}$\,$\mbox{]} args)  throws Exception  
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_sentence_detection_trainer_8java_source_l00020}{20}} of file \mbox{\hyperlink{_sentence_detection_trainer_8java_source}{Sentence\+Detection\+Trainer.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_sentence_detection_trainer_ac80405591298c5f1e235179d40555dce}\index{org.fogbeam.example.opennlp.training.SentenceDetectionTrainer@{org.fogbeam.example.opennlp.training.SentenceDetectionTrainer}!main@{main}}
+\index{main@{main}!org.fogbeam.example.opennlp.training.SentenceDetectionTrainer@{org.fogbeam.example.opennlp.training.SentenceDetectionTrainer}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_sentence_detection_trainer_ac80405591298c5f1e235179d40555dce} 
+static void org.\+fogbeam.\+example.\+opennlp.\+training.\+Sentence\+Detection\+Trainer.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{_sentence_detection_trainer_8java_source_l00022}{22}} of file \mbox{\hyperlink{_sentence_detection_trainer_8java_source}{Sentence\+Detection\+Trainer.\+java}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ Charset\ charset\ =\ Charset.forName(\textcolor{stringliteral}{"{}UTF-\/8"{}});\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ ObjectStream<String>\ lineStream\ =\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ PlainTextByLineStream(\textcolor{keyword}{new}\ FileInputStream(\textcolor{stringliteral}{"{}training\_data/en-\/sent.train"{}}),\ charset);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ ObjectStream<SentenceSample>\ sampleStream\ =\ \textcolor{keyword}{new}\ SentenceSampleStream(lineStream);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ SentenceModel\ model;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ model\ =\ SentenceDetectorME.train(\textcolor{stringliteral}{"{}en"{}},\ sampleStream,\ \textcolor{keyword}{true},\ \textcolor{keyword}{null},\ TrainingParameters.defaultParams());}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ sampleStream.close();}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ OutputStream\ modelOut\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ File\ modelFile\ =\ \textcolor{keyword}{new}\ File(\ \textcolor{stringliteral}{"{}models/en-\/sent.model"{}}\ );}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ modelOut\ =\ \textcolor{keyword}{new}\ BufferedOutputStream(\textcolor{keyword}{new}\ FileOutputStream(modelFile));}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ model.serialize(modelOut);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{finally}\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (modelOut\ !=\ \textcolor{keyword}{null})\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ modelOut.close();\ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_sentence_detection_trainer_8java}{Sentence\+Detection\+Trainer.\+java}}\end{DoxyCompactItemize}

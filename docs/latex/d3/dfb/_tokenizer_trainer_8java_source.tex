@@ -1,0 +1,63 @@
+\doxysection{Tokenizer\+Trainer.\+java}
+\hypertarget{_tokenizer_trainer_8java_source}{}\label{_tokenizer_trainer_8java_source}\index{TokenizerTrainer.java@{TokenizerTrainer.java}}
+\mbox{\hyperlink{_tokenizer_trainer_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00002}00002\ \textcolor{keyword}{package\ }org.fogbeam.example.opennlp.training;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00005}00005\ \textcolor{keyword}{import}\ java.io.BufferedOutputStream;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00006}00006\ \textcolor{keyword}{import}\ java.io.FileInputStream;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.io.FileOutputStream;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.io.OutputStream;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.nio.charset.Charset;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00011}00011\ \textcolor{keyword}{import}\ opennlp.tools.tokenize.TokenSample;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00012}00012\ \textcolor{keyword}{import}\ opennlp.tools.tokenize.TokenSampleStream;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00013}00013\ \textcolor{keyword}{import}\ opennlp.tools.tokenize.TokenizerME;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00014}00014\ \textcolor{keyword}{import}\ opennlp.tools.tokenize.TokenizerModel;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00015}00015\ \textcolor{keyword}{import}\ opennlp.tools.util.ObjectStream;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00016}00016\ \textcolor{keyword}{import}\ opennlp.tools.util.PlainTextByLineStream;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00017}00017\ \textcolor{keyword}{import}\ opennlp.tools.util.TrainingParameters;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00020}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_tokenizer_trainer}{00020}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_tokenizer_trainer}{TokenizerTrainer}}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00022}\mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_tokenizer_trainer_ae7cb041680d5e391fb77b3662a1504bd}{00022}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classorg_1_1fogbeam_1_1example_1_1opennlp_1_1training_1_1_tokenizer_trainer_ae7cb041680d5e391fb77b3662a1504bd}{main}}(\ String[]\ args\ )\ \textcolor{keywordflow}{throws}\ Exception}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ Charset\ charset\ =\ Charset.forName(\ \textcolor{stringliteral}{"{}UTF-\/8"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ ObjectStream<String>\ lineStream\ =\ \textcolor{keyword}{new}\ PlainTextByLineStream(}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ FileInputStream(\ \textcolor{stringliteral}{"{}training\_data/en-\/token.train"{}}\ ),\ charset\ );}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ ObjectStream<TokenSample>\ sampleStream\ =\ \textcolor{keyword}{new}\ TokenSampleStream(\ lineStream\ );}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ TokenizerModel\ model;}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ model\ =\ TokenizerME.train(\ \textcolor{stringliteral}{"{}en"{}},\ sampleStream,\ \textcolor{keyword}{true},\ TrainingParameters.defaultParams()\ );}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ sampleStream.close();}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ OutputStream\ modelOut\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ modelOut\ =\ \textcolor{keyword}{new}\ BufferedOutputStream(\ \textcolor{keyword}{new}\ FileOutputStream(\ \textcolor{stringliteral}{"{}models/en-\/token.model"{}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ model.serialize(\ modelOut\ );}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ modelOut\ !=\ \textcolor{keyword}{null}\ )}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modelOut.close();}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ System.out.println(\ \textcolor{stringliteral}{"{}done"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_tokenizer_trainer_8java_source_l00057}00057\ \}}
+
+\end{DoxyCode}
