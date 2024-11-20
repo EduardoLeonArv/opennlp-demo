@@ -16,9 +16,13 @@ import opennlp.tools.doccat.DocumentSampleStream;
 import opennlp.tools.util.ObjectStream;
 import opennlp.tools.util.PlainTextByLineStream;
 
+import org.fogbeam.example.opennlp.ChunkerMain;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DocumentClassifierTrainer
 {
+	 private static final Logger logger = LoggerFactory.getLogger(ChunkerMain.class);
 	public static void main( String[] args ) throws Exception
 	{
 		DoccatModel model = null;
@@ -35,7 +39,7 @@ public class DocumentClassifierTrainer
 		catch( IOException e )
 		{
 			// Failed to read or parse training data, training failed
-			e.printStackTrace();
+			logger.error("An error occurred during the chunker process", e);
 		}
 		finally
 		{
