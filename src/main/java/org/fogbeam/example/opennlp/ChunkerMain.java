@@ -4,11 +4,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import opennlp.tools.chunker.ChunkerME;
 import opennlp.tools.chunker.ChunkerModel;
 
 public class ChunkerMain
 {
+    private static final Logger logger = LoggerFactory.getLogger(ChunkerMain.class);
+
     public static void main( String[] args ) throws Exception
     {
         InputStream modelIn = null;
@@ -47,14 +52,13 @@ public class ChunkerMain
             
             for( int i = 0; i < sent.length; i++ )
             {
-                System.out.println( "Token ["+ sent[i] + "] has chunk tag [" + tag[i] + "] with probability = " + probs[i] );
+                logger.info("Token [{}] has chunk tag [{}] with probability = {}", sent[i], tag[i], probs[i]);
             }
             
         }
         catch( IOException e )
         {
-            // Model loading failed, handle the error
-            e.printStackTrace();
+            logger.error("Error while loading the model", e);
         }
         finally
         {
@@ -66,11 +70,11 @@ public class ChunkerMain
                 }
                 catch( IOException e )
                 {
+                    logger.warn("Error while closing the model input stream", e);
                 }
             }
         }
         
-        
-        System.out.println( "done" );
+        logger.info("Processing complete");
     }
 }
